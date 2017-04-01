@@ -55,6 +55,30 @@ class ArticleListTableViewController: UITableViewController {
     }
     */
 
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+        let more = UITableViewRowAction(style: .normal, title: "Save to Personal") { action, index in
+            print("more button tapped")
+        }
+        more.backgroundColor = .blue
+        
+//        let favorite = UITableViewRowAction(style: .normal, title: "Favorite") { action, index in
+//            print("favorite button tapped")
+//        }
+//        favorite.backgroundColor = .orange
+//        
+//        let share = UITableViewRowAction(style: .normal, title: "Share") { action, index in
+//            print("share button tapped")
+//        }
+//        share.backgroundColor = .blue
+        
+        return [more]
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
     /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
