@@ -9,6 +9,7 @@ target 'artix' do
     pod 'Firebase'
     pod 'Firebase/Core'
     pod 'Firebase/Database'
+    pod 'ReadabilityKit'
 
 
   # Pods for artix
@@ -19,6 +20,7 @@ target 'artix' do
     pod 'Firebase'
     pod 'Firebase/Core'
     pod 'Firebase/Database'
+    pod 'ReadabilityKit'
   end
 
   target 'artixUITests' do
@@ -27,6 +29,7 @@ target 'artix' do
     pod 'Firebase'
     pod 'Firebase/Core'
     pod 'Firebase/Database'
+    pod 'ReadabilityKit'
   end
 
 end

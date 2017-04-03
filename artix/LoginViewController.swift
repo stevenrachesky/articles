@@ -101,7 +101,12 @@ class LoginViewController: UIViewController {
             
         if groupCode.text == betaGroupCode
         {
-            let post = ["fullName": fullName.text!, "personalList": ["Article One"], "groups": "Harvard"] as [String : Any]
+            //let post = ["fullName": fullName.text!, "personalList": ["key1":["Name" : "Name One", "url" :"Article One", "date": "Date"], "key2":["Name" : "Name Two", "url" :"Article Two", "date": "Date"], "key3": ["Name": "Name Three", "url" :"Article Three", "date": "Date"]], "groups": ["HarvardBeta1"]] as [String : Any]
+            
+            let post = ["fullName": fullName.text!, "personalList": [], "groups": ["HarvardBeta1"]] as [String : Any]
+            
+            
+            
             self.ref.child("users").child(fullName.text!).setValue(post)
             performSegue(withIdentifier: "login", sender: sender)
         }
@@ -112,14 +117,22 @@ class LoginViewController: UIViewController {
         return false
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "login"
+        {
+            let destVC = segue.destination as! MainTabBarController
+            destVC.name = fullName.text!
+
+        }
+        
     }
-    */
+    
 
 }

@@ -1,0 +1,10 @@
+{
+  "groups" : {"HarvardBeta1": { "key1":{"Name" : "Name One", "url" :"Article One", "date": "Date"}, "key2":{"Name" : "Name Two", "url" :"Article Two", "date": "Date"}, "key3":{"Name" : "Name Three", "url" :"Article Three", "date": "Date"}}},
+  "users" : {
+    "Steven Rachesky" : {
+      "fullName" : "Steven Rachesky",
+      "groups" : ["HarvardBeta1"],
+      "personalList" : { "key1":{"Name" : "Name One", "url" :"Article One", "date": "Date"}, "key2":{"Name" : "Name Two", "url" :"Article Two", "date": "Date"}, "key3":{"Name" : "Name Three", "url" :"Article Three", "date": "Date"}}
+  }
+}
+}

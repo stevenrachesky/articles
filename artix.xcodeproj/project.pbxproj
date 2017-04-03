@@ -10,10 +10,14 @@
 		09AE9671DB3F4892352378FF /* Pods_artixUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1FA04885B47334A012E31D4 /* Pods_artixUITests.framework */; };
 		9F11261B1E8EDCB500E8103E /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F11261A1E8EDCB500E8103E /* ArticleViewController.swift */; };
 		9F11261D1E8F653600E8103E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F11261C1E8F653600E8103E /* GoogleService-Info.plist */; };
+		9F1602721E9011A300885353 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1602711E9011A300885353 /* MainTabBarController.swift */; };
+		9F1602761E90135A00885353 /* GroupNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1602751E90135A00885353 /* GroupNavigationViewController.swift */; };
+		9F2DD9F81E90619300C423DE /* AddArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2DD9F71E90619300C423DE /* AddArticleViewController.swift */; };
 		9F35B8061E8F712F004485FF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F35B8051E8F712F004485FF /* LoginViewController.swift */; };
 		9F36AA371E89B2C6003E9E2F /* PersonalListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F36AA361E89B2C6003E9E2F /* PersonalListTableViewController.swift */; };
 		9F36AA391E89B2E6003E9E2F /* GroupListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F36AA381E89B2E6003E9E2F /* GroupListTableViewController.swift */; };
 		9F36AA3B1E89B675003E9E2F /* ArticleListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F36AA3A1E89B675003E9E2F /* ArticleListTableViewController.swift */; };
+		9F802D201E91DD2B006C4D5B /* ArticlesReadabilityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F802D1F1E91DD2B006C4D5B /* ArticlesReadabilityTableViewCell.swift */; };
 		9FDBF19E1E8C532900770FDE /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDBF1801E8C532900770FDE /* AsyncButton.swift */; };
 		9FDBF19F1E8C532900770FDE /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDBF1811E8C532900770FDE /* AsyncImageView.swift */; };
 		9FDBF1A01E8C532900770FDE /* AutoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDBF1821E8C532900770FDE /* AutoTextView.swift */; };
@@ -80,10 +84,14 @@
 		776E43DD5D4E4B0CB874FA77 /* Pods-artixUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-artixUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-artixUITests/Pods-artixUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9F11261A1E8EDCB500E8103E /* ArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		9F11261C1E8F653600E8103E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9F1602711E9011A300885353 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		9F1602751E90135A00885353 /* GroupNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupNavigationViewController.swift; sourceTree = "<group>"; };
+		9F2DD9F71E90619300C423DE /* AddArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddArticleViewController.swift; sourceTree = "<group>"; };
 		9F35B8051E8F712F004485FF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9F36AA361E89B2C6003E9E2F /* PersonalListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonalListTableViewController.swift; path = ../PersonalListTableViewController.swift; sourceTree = "<group>"; };
 		9F36AA381E89B2E6003E9E2F /* GroupListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupListTableViewController.swift; sourceTree = "<group>"; };
 		9F36AA3A1E89B675003E9E2F /* ArticleListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleListTableViewController.swift; sourceTree = "<group>"; };
+		9F802D1F1E91DD2B006C4D5B /* ArticlesReadabilityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesReadabilityTableViewCell.swift; sourceTree = "<group>"; };
 		9FDBF1801E8C532900770FDE /* AsyncButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
 		9FDBF1811E8C532900770FDE /* AsyncImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		9FDBF1821E8C532900770FDE /* AutoTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoTextView.swift; sourceTree = "<group>"; };
@@ -223,11 +231,15 @@
 		9FE7600E1E889C1C004A72C8 /* artix */ = {
 			isa = PBXGroup;
 			children = (
+				9F1602751E90135A00885353 /* GroupNavigationViewController.swift */,
 				9F36AA361E89B2C6003E9E2F /* PersonalListTableViewController.swift */,
 				9F36AA3A1E89B675003E9E2F /* ArticleListTableViewController.swift */,
 				9F36AA381E89B2E6003E9E2F /* GroupListTableViewController.swift */,
 				9FE7600F1E889C1C004A72C8 /* AppDelegate.swift */,
 				9FE760151E889C1C004A72C8 /* Main.storyboard */,
+				9F802D1F1E91DD2B006C4D5B /* ArticlesReadabilityTableViewCell.swift */,
+				9F2DD9F71E90619300C423DE /* AddArticleViewController.swift */,
+				9F1602711E9011A300885353 /* MainTabBarController.swift */,
 				9F35B8051E8F712F004485FF /* LoginViewController.swift */,
 				9F11261A1E8EDCB500E8103E /* ArticleViewController.swift */,
 				9FDBF1BB1E8C578600770FDE /* ArticleTableViewCell.swift */,
@@ -357,15 +369,18 @@
 					9FE7600B1E889C1C004A72C8 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 8XZ988HBZ9;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					9FE760211E889C1C004A72C8 = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 9FE7600B1E889C1C004A72C8;
 					};
 					9FE7602C1E889C1C004A72C8 = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 9FE7600B1E889C1C004A72C8;
 					};
@@ -563,11 +578,14 @@
 				9FDBF1A91E8C532900770FDE /* ImageLoader.swift in Sources */,
 				9FDBF1B51E8C532900770FDE /* SpringTextField.swift in Sources */,
 				9F36AA3B1E89B675003E9E2F /* ArticleListTableViewController.swift in Sources */,
+				9F1602761E90135A00885353 /* GroupNavigationViewController.swift in Sources */,
 				9FDBF1A31E8C532900770FDE /* DesignableImageView.swift in Sources */,
 				9FDBF1AF1E8C532900770FDE /* SoundPlayer.swift in Sources */,
 				9F11261B1E8EDCB500E8103E /* ArticleViewController.swift in Sources */,
+				9F1602721E9011A300885353 /* MainTabBarController.swift in Sources */,
 				9FDBF1AE1E8C532900770FDE /* Misc.swift in Sources */,
 				9FDBF1A81E8C532900770FDE /* DesignableView.swift in Sources */,
+				9F2DD9F81E90619300C423DE /* AddArticleViewController.swift in Sources */,
 				9FDBF1B71E8C532900770FDE /* SpringView.swift in Sources */,
 				9F36AA371E89B2C6003E9E2F /* PersonalListTableViewController.swift in Sources */,
 				9FDBF19F1E8C532900770FDE /* AsyncImageView.swift in Sources */,
@@ -577,6 +595,7 @@
 				9FDBF1B21E8C532900770FDE /* SpringButton.swift in Sources */,
 				9FDBF1A51E8C532900770FDE /* DesignableTabBarController.swift in Sources */,
 				9FDBF1A41E8C532900770FDE /* DesignableLabel.swift in Sources */,
+				9F802D201E91DD2B006C4D5B /* ArticlesReadabilityTableViewCell.swift in Sources */,
 				9FDBF1B81E8C532900770FDE /* TransitionManager.swift in Sources */,
 				9FDBF1BC1E8C578600770FDE /* ArticleTableViewCell.swift in Sources */,
 				9F35B8061E8F712F004485FF /* LoginViewController.swift in Sources */,

@@ -7,8 +7,15 @@
 //
 
 import UIKit
+import Firebase
 
 class GroupListTableViewController: UITableViewController {
+    
+    var userGroups : [String] = []
+    var name = ""
+    
+    //Firebase reference
+    var ref = FIRDatabase.database().reference()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +25,31 @@ class GroupListTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        print("Group list: ")
+        print(name)
+        
+        let path = "users/" + self.name + "/groups"
+        
+        self.ref.child(path).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if snapshot.exists() == true
+            {
+                self.userGroups = (snapshot.value as! NSArray) as! [String]
+            }
+            else
+            {
+                let alert = UIAlertController(title: "No Groups", message: "Sorry, we did not find any groups that you belonged to!", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+            
+            print(self.userGroups)
+            self.tableView.reloadData()
+            
+        
+        })
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,14 +66,17 @@ class GroupListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return self.userGroups.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "groups", for: indexPath)
         
-        cell.textLabel?.text! = "Group 1"
+        cell.textLabel?.text! = self.userGroups[(indexPath as NSIndexPath).item]
+        cell.textLabel?.tag = (indexPath as NSIndexPath).row
+        cell.tag = (indexPath as NSIndexPath).row
+
 
         // Configure the cell...
 
@@ -84,14 +119,25 @@ class GroupListTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        
+        if segue.identifier == "groupTouch"
+        {
+            let destVC = segue.destination as! ArticleViewController
+            destVC.name = self.name
+            
+            let buttonRow = (sender! as AnyObject).tag
+            destVC.group = self.userGroups[buttonRow!]
+            
+        }
     }
-    */
+    
 
 }
