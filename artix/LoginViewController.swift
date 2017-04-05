@@ -28,6 +28,14 @@ class LoginViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        //tap.cancelsTouchesInView = false
+        
+        view.addGestureRecognizer(tap)
+        
         rememberMeActive = UserDefaults.standard.bool(forKey: "isRememberMeActive")
         let name = UserDefaults.standard.string(forKey: "name")
         let group = UserDefaults.standard.string(forKey: "group")
@@ -132,6 +140,12 @@ class LoginViewController: UIViewController {
 
         }
         
+    }
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
 

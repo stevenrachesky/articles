@@ -19,6 +19,7 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
+  - IQKeyboardManagerSwift (4.0.8)
   - Ji (2.0.1):
     - Ji/Ji (= 2.0.1)
   - Ji/Ji (2.0.1):
@@ -31,6 +32,7 @@ DEPENDENCIES:
   - Firebase
   - Firebase/Core
   - Firebase/Database
+  - IQKeyboardManagerSwift
   - ReadabilityKit
 
 SPEC CHECKSUMS:
@@ -40,9 +42,10 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 05c96d7b43a7368dc91c07791adb49683e1738d1
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  IQKeyboardManagerSwift: c04bc9f68473823f825eb44d958fce98d921bead
   Ji: 6bb602a28dd08b804158f64990e6051ed5de0110
   ReadabilityKit: 49c26a2da9708ae3b355854d5bee6a7edee2dfee
 
-PODFILE CHECKSUM: f0ee44f2527f28f118a5f07600dd0e9ca4b27f53
+PODFILE CHECKSUM: 9821ffb757bf2f08e49043e5df8d1f7cefafcbb3
 
 COCOAPODS: 1.0.0

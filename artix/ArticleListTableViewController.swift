@@ -19,6 +19,7 @@ class ArticleListTableViewController: UITableViewController {
     var articlesDate : [NSDate] = []
     var articlesTitle : [String] = []
     var articlesImage : [UIImage] = []
+    var colorDict = [String : UIColor]()
     
     // Readability variables
     var url: URL?
@@ -37,6 +38,7 @@ class ArticleListTableViewController: UITableViewController {
         self.articlesURL = []
         self.articlesName = []
         self.articlesDate = []
+        self.colorDict = [String : UIColor]()
         
         let path = "groups/" + self.group
         
@@ -65,6 +67,14 @@ class ArticleListTableViewController: UITableViewController {
                     
                     //print(childDic)
                 }
+                
+                //print("Unique Names: ")
+                let uniqueNames = Array(Set(self.articlesName))
+                for uname in uniqueNames
+                {
+                    self.colorDict[uname] = self.getRandomColor()
+                }
+                
                 
             }
             else
@@ -143,9 +153,15 @@ class ArticleListTableViewController: UITableViewController {
         // Configure the cell...
         //cell.url.text! = self.articlesURL[(indexPath as NSIndexPath).item]
         
+        let userName = self.articlesName[(indexPath as NSIndexPath).item]
+        
+        cell.articleButton.borderColor = self.colorDict[userName]!
+        cell.articleButton.setTitleColor(self.colorDict[userName]!, for: .normal)
+        
+        
         var articleTitle = ""
         var articleImage = UIImage()
-            
+        
             self.url = URL(string: self.articlesURL[(indexPath as NSIndexPath).item])
             
             Readability.parse(url: self.url!) { data in
@@ -213,6 +229,7 @@ class ArticleListTableViewController: UITableViewController {
             self.ref.child(path).childByAutoId().setValue(post)
             
             tableView.setEditing(false, animated: true)
+            
         }
         more.backgroundColor = UIColor(red: 2.0/255.0, green: 179.0/255.0, blue: 1.0, alpha: 1.0)
         
@@ -232,6 +249,7 @@ class ArticleListTableViewController: UITableViewController {
         if let url = URL(string: self.articlesURL[indexPath.row])
         {
             UIApplication.shared.openURL(url)
+            tableView.deselectRow(at: indexPath, animated: true)
         }
         else
         {
@@ -239,6 +257,15 @@ class ArticleListTableViewController: UITableViewController {
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
+    }
+    
+    func getRandomColor() -> UIColor{
+        //Generate between 0 to 1
+        let red:CGFloat = CGFloat(drand48())
+        let green:CGFloat = CGFloat(drand48())
+        let blue:CGFloat = CGFloat(drand48())
+        
+        return UIColor(red:red, green: green, blue: blue, alpha: 1.0)
     }
     
     

@@ -12,15 +12,6 @@ import ReadabilityKit
 
 class PersonalListTableViewController: UITableViewController {
     
-//    var indicator = UIActivityIndicatorView()
-//    
-//    func activityIndicator() {
-//        indicator = UIActivityIndicatorView(frame: CGRect(origin: CGPoint(x: 0,y :0), size: CGSize(width: 40, height: 40)))
-//        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-//        indicator.center = self.view.center
-//        self.view.addSubview(indicator)
-//        indicator.bringSubview(toFront: indicator)
-//    }
     
     var numRows = 5
     var name = ""
@@ -30,6 +21,7 @@ class PersonalListTableViewController: UITableViewController {
     var articlesDate : [NSDate] = []
     var articlesTitle : [String] = []
     var articlesImage : [UIImage] = []
+    var colorDict = [String : UIColor]()
 
     //Firebase reference
     var ref = FIRDatabase.database().reference()
@@ -53,6 +45,7 @@ class PersonalListTableViewController: UITableViewController {
             self.articlesURL = []
             self.articlesName = []
             self.articlesDate = []
+            self.colorDict = [String : UIColor]()
             
             if snapshot.exists() == true
             {
@@ -77,6 +70,11 @@ class PersonalListTableViewController: UITableViewController {
                 }
                 
                 self.articlesKeys = articlesDict.allKeys as! [String]
+                let uniqueNames = Array(Set(self.articlesName))
+                for uname in uniqueNames
+                {
+                    self.colorDict[uname] = self.getRandomColor()
+                }
                 
             }
             else
@@ -148,6 +146,11 @@ class PersonalListTableViewController: UITableViewController {
         // Configure the cell...
         //cell.url.text! = self.articlesURL[(indexPath as NSIndexPath).item]
         
+        let userName = self.articlesName[(indexPath as NSIndexPath).item]
+        
+        cell.articleButton.borderColor = self.colorDict[userName]!
+        cell.articleButton.setTitleColor(self.colorDict[userName]!, for: .normal)
+        
         var articleTitle = ""
         var articleImage = UIImage()
         
@@ -198,6 +201,8 @@ class PersonalListTableViewController: UITableViewController {
         if let url = URL(string: self.articlesURL[indexPath.row])
         {
             UIApplication.shared.openURL(url)
+            tableView.deselectRow(at: indexPath, animated: true)
+
         }
         else
         {
@@ -233,6 +238,15 @@ class PersonalListTableViewController: UITableViewController {
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
+    }
+    
+    func getRandomColor() -> UIColor{
+        //Generate between 0 to 1
+        let red:CGFloat = CGFloat(drand48())
+        let green:CGFloat = CGFloat(drand48())
+        let blue:CGFloat = CGFloat(drand48())
+        
+        return UIColor(red:red, green: green, blue: blue, alpha: 1.0)
     }
     
 
