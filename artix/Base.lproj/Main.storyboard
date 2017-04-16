@@ -84,7 +84,14 @@
                             <outlet property="delegate" destination="vPA-2i-NfK" id="79z-iG-W12"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Personal List" id="SLe-iR-F2h"/>
+                    <navigationItem key="navigationItem" title="Personal List" id="SLe-iR-F2h">
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="0Z8-L5-L5B">
+                            <color key="tintColor" red="0.0078431372550000003" green="0.70196078429999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="Gxl-h4-joE" kind="presentation" identifier="logout" id="aGi-E1-Rpp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gL6-DJ-93g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -94,20 +101,20 @@
         <scene sceneID="grO-V9-c3g">
             <objects>
                 <tableViewController id="92A-6d-J3A" customClass="GroupListTableViewController" customModule="artix" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Lzr-xp-lg7">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" id="Lzr-xp-lg7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="groups" textLabel="EOh-Er-Zef" style="IBUITableViewCellStyleDefault" id="wwV-Ep-YYo">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wwV-Ep-YYo" id="Pwg-aR-mqf">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="54.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Group Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EOh-Er-Zef">
-                                            <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
+                                            <rect key="frame" x="15" y="0.0" width="325" height="54.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                             <nil key="textColor"/>
@@ -276,7 +283,7 @@
                         <outlet property="addedNamesTextView" destination="R1j-qg-7js" id="otZ-Lj-aol"/>
                         <outlet property="phoneNumberTextField" destination="eqA-1j-kgc" id="D0U-Qd-fkO"/>
                         <outlet property="tableView" destination="XGg-h4-qZj" id="31b-Co-B2X"/>
-                        <segue destination="oV2-Pk-SDt" kind="show" identifier="addedGroup" id="s57-8I-5wP"/>
+                        <segue destination="49e-Tb-3d3" kind="show" identifier="addedGroup" id="ANf-Wh-9nr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dld-dl-vmq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -745,6 +752,7 @@
                                 <blurEffect style="light"/>
                             </visualEffectView>
                         </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Qqb-mX-LFz" firstAttribute="top" secondItem="zKa-ed-qln" secondAttribute="bottom" id="I0m-4d-cbk"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Qqb-mX-LFz" secondAttribute="trailing" constant="-16" id="U5G-aD-G59"/>
@@ -788,9 +796,10 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oV2-Pk-SDt" customClass="GroupNavigationViewController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Groups" image="group_" selectedImage="group" id="cPa-gy-q4n"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cIp-zi-nLa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cIp-zi-nLa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.0078431372550000003" green="0.70196078429999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -807,9 +816,10 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="81q-cB-Mej" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Personal" image="personal" selectedImage="personal" id="acW-dT-cKf"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xOC-J7-yIF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xOC-J7-yIF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.0078431372550000003" green="0.70196078429999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1133,7 +1143,6 @@
         <image name="personal" width="37" height="35"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="s57-8I-5wP"/>
         <segue reference="CL8-ex-oII"/>
     </inferredMetricsTieBreakers>
 </document>

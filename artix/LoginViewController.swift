@@ -17,6 +17,7 @@ class LoginViewController: UIViewController {
     var rememberMeActive = false
     let inactiveImage = UIImage(named: "inactive checkbox")
     let activeImage = UIImage(named: "active checkbox")
+    var autoLogin = true
     
 
     @IBOutlet weak var rememberMeImage: UIImageView!
@@ -54,7 +55,7 @@ class LoginViewController: UIViewController {
         }
         
         // Automatic login
-        if (rememberMeActive == true && fullName.text != "")
+        if (rememberMeActive == true && fullName.text != "" && self.autoLogin == true)
         {
             print("HERE")
             rememberMeImage.image = activeImage
@@ -142,6 +143,7 @@ class LoginViewController: UIViewController {
             UserDefaults.standard.set(fullName.text, forKey: "name")
             UserDefaults.standard.set(groupCode.text, forKey: "group")
             UserDefaults.standard.set(rememberMeActive, forKey: "isRememberMeActive")
+            self.autoLogin = true
         }
             
 
@@ -177,7 +179,11 @@ class LoginViewController: UIViewController {
                 return
             }
             
+
             self.performSegue(withIdentifier: "login", sender: sender)
+            
+            
+            
         }
         
     }

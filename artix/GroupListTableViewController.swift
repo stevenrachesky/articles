@@ -97,6 +97,52 @@ class GroupListTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+        
+        let more = UITableViewRowAction(style: .normal, title: "Add\nmember") { action, index in
+            print("more button tapped")
+            
+//            let path = "users/" + self.userID! + "/personalList"
+//            
+//            let date = Date()
+//            print(date)
+//            
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "EEE, dd MMM yyyy hh:mm:ss +zzzz"
+//            let dateString = dateFormatter.string(from: date)
+//            
+//            let post = ["Name": self.articlesName[(index as NSIndexPath).item], "url":self.articlesURL[(index as NSIndexPath).item], "date": dateString, "title":self.articlesTitle[(index as NSIndexPath).item]]
+//            
+//            self.ref.child(path).childByAutoId().setValue(post)
+            
+            tableView.setEditing(false, animated: true)
+            
+        }
+        more.backgroundColor = UIColor(red: 2.0/255.0, green: 179.0/255.0, blue: 1.0, alpha: 1.0)
+        
+        let leave = UITableViewRowAction(style: .normal, title: "Leave\ngroup") { action, index in
+            print("leave button tapped")
+            
+            
+            tableView.setEditing(false, animated: true)
+            
+        }
+        leave.backgroundColor = UIColor(red: 249.0/255.0, green: 24.0/255.0, blue: 24.0/255.0, alpha: 1.0)
+        
+        let edit = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
+            print("edit button tapped")
+            
+            
+            tableView.setEditing(false, animated: true)
+            
+        }
+        edit.backgroundColor = UIColor(red: 192.0/255.0, green: 192.0/255.0, blue: 192.0/255.0, alpha: 1.0)
+        
+        
+        
+        return [more, leave, edit]
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.

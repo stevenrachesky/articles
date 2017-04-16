@@ -296,14 +296,40 @@ class PersonalListTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        
+        if identifier == "logout"
+        {
+            let firebaseAuth = FIRAuth.auth()
+            do {
+                try firebaseAuth?.signOut()
+                return true
+            }
+            catch let signOutError as NSError {
+                print ("Error signing out: \(signOutError)")
+                return false
+            }
+        }
+        
+        return true
+        
+    }
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "logout"
+        {
+            let destVC = segue.destination as! LoginViewController
+            destVC.autoLogin = false
+        }
+        
     }
-    */
+    
 
 }
