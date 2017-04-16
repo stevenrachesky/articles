@@ -12,7 +12,9 @@ import Firebase
 class GroupListTableViewController: UITableViewController {
     
     var userGroups : [String] = []
+    var userGroupsKeys : [String] = []
     var name = ""
+    var userID = FIRAuth.auth()?.currentUser?.uid
     
     //Firebase reference
     var ref = FIRDatabase.database().reference()
@@ -29,13 +31,15 @@ class GroupListTableViewController: UITableViewController {
         print("Group list: ")
         print(name)
         
-        let path = "users/" + self.name + "/groups"
+        let path = "users/" + userID! + "/groups"
         
         self.ref.child(path).observeSingleEvent(of: .value, with: { (snapshot) in
             
             if snapshot.exists() == true
             {
-                self.userGroups = (snapshot.value as! NSArray) as! [String]
+                let snapDict = snapshot.value as! NSDictionary
+                self.userGroups = snapDict.allValues as! [String]
+                self.userGroupsKeys = snapDict.allKeys as! [String]
             }
             else
             {
@@ -44,11 +48,21 @@ class GroupListTableViewController: UITableViewController {
                 self.present(alert, animated: true, completion: nil)
             }
             
-            print(self.userGroups)
+            //print(self.userGroups)
             self.tableView.reloadData()
             
         
         })
+        
+        if name == ""
+        {
+            let user_name_path = "users/" + userID! + "/fullName"
+            self.ref.child(user_name_path).observeSingleEvent(of: .value, with: { (snapshot) in
+                print(snapshot.value as! String)
+                self.name = snapshot.value! as! String
+            })
+            
+        }
         
     }
 
@@ -134,7 +148,7 @@ class GroupListTableViewController: UITableViewController {
             destVC.name = self.name
             
             let buttonRow = (sender! as AnyObject).tag
-            destVC.group = self.userGroups[buttonRow!]
+            destVC.group = self.userGroupsKeys[buttonRow!] 
             
         }
     }

@@ -9,11 +9,14 @@
 import UIKit
 import Firebase
 import IQKeyboardManagerSwift
+import Contacts
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var store = CNContactStore()
+
 
     override init() {
         super.init()
@@ -49,6 +52,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    class func sharedDelegate() -> AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+    
+    func checkAccessStatus(completionHandler: @escaping (_:Bool) -> Void) {
+        let authorizationStatus = CNContactStore.authorizationStatus(for: CNEntityType.contacts)
+        
+        switch authorizationStatus {
+        case .authorized:
+            completionHandler(true)
+        case .denied, .notDetermined:
+            self.store.requestAccess(for: CNEntityType.contacts, completionHandler: { (access, accessError) -> Void in
+                if access {
+                    completionHandler(access)
+                } else {
+                    print("access denied")
+                }
+            })
+        default:
+            completionHandler(false)
+        }
+    }
+    
 
 
 }

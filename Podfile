@@ -9,6 +9,7 @@ target 'artix' do
     pod 'Firebase'
     pod 'Firebase/Core'
     pod 'Firebase/Database'
+    pod 'Firebase/Auth'
     pod 'ReadabilityKit'
     pod 'IQKeyboardManagerSwift'
 
@@ -21,6 +22,7 @@ target 'artix' do
     pod 'Firebase'
     pod 'Firebase/Core'
     pod 'Firebase/Database'
+    pod 'Firebase/Auth'
     pod 'ReadabilityKit'
     pod 'IQKeyboardManagerSwift'
   end
@@ -31,6 +33,7 @@ target 'artix' do
     pod 'Firebase'
     pod 'Firebase/Core'
     pod 'Firebase/Database'
+    pod 'Firebase/Auth'
     pod 'ReadabilityKit'
     pod 'IQKeyboardManagerSwift'
   end

@@ -22,27 +22,31 @@ class ArticleListTableViewController: UITableViewController {
     var colorDict = [String : UIColor]()
     
     // Readability variables
-    var url: URL?
     var parser: Readability?
+    var url: URL?
     var image: UIImage?
     var parsedData: ReadabilityData?
     
     //Firebase reference
     var ref = FIRDatabase.database().reference()
+    var userID = FIRAuth.auth()?.currentUser?.uid
     
     override func viewWillAppear(_ animated: Bool) {
         
+        print("viewWillAppear Begin - articleList")
         
-        self.tableView.reloadData()
         
-        self.articlesURL = []
-        self.articlesName = []
-        self.articlesDate = []
-        self.colorDict = [String : UIColor]()
+        //self.tableView.reloadData()
         
         let path = "groups/" + self.group
         
         self.ref.child(path).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            self.articlesURL = []
+            self.articlesName = []
+            self.articlesDate = []
+            self.colorDict = [String : UIColor]()
+            self.articlesTitle = []
             
             if snapshot.exists() == true
             {
@@ -54,6 +58,14 @@ class ArticleListTableViewController: UITableViewController {
                     
                     self.articlesURL.append(childDic?["url"] as! String)
                     self.articlesName.append(childDic?["Name"] as! String)
+                    if let a_title = childDic?["title"] as! String!
+                    {
+                        self.articlesTitle.append(a_title)
+                    }
+                    else
+                    {
+                        self.articlesTitle.append(childDic?["url"] as! String)
+                    }
                     
                     let dateString = childDic?["date"] as! String
                     
@@ -84,26 +96,24 @@ class ArticleListTableViewController: UITableViewController {
                 self.present(alert, animated: true, completion: nil)
             }
             
-            //print(self.articlesDate)
-            //print("_")
-            let sortedArticlesDate = self.articlesDate.sorted(by: { $0.compare($1 as Date) == .orderedDescending})
-            //print(sortedArticlesDate)
-            //print(self.articlesURL)
-            //print("___")
             
-            let result = zip(zip(self.articlesDate, self.articlesName), self.articlesURL).map { ($0.0.0, $0.0.1, $0.1) }.sorted(by: { $0.0.compare($1.0 as Date) == .orderedDescending})
+            let result = zip(zip(zip(self.articlesDate, self.articlesName), self.articlesURL), self.articlesTitle).map { ($0.0.0, $0.0.1, $0.1, $0.0.0.1) }.sorted(by: { $0.0.0.compare($1.0.0 as Date) == .orderedDescending})
             //print(result)
             
-            self.articlesName = result.map { $0.1 }
-            self.articlesURL = result.map { $0.2 }
-            
+            self.articlesName = result.map { $0.3 }
+            self.articlesURL = result.map { $0.1 }
+            self.articlesTitle = result.map {$0.2}
+
+        
             
             
             self.tableView.reloadData()
             
+            print("viewWillAppear End - articleList")
+            
         })
         
-        self.tableView.reloadData()
+        //self.tableView.reloadData()
     }
     
 
@@ -117,14 +127,16 @@ class ArticleListTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
 
         
-        print("Article List: ")
-        print(self.name)
-        print(self.group)
+//        print("Article List: ")
+//        print(self.name)
+//        print(self.group)
         
-        self.tableView.reloadData()
+        //self.tableView.reloadData()
+
         
         
     }
+    
     
 
 
@@ -142,7 +154,7 @@ class ArticleListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        print(self.articlesName.count)
+        //print(self.articlesName.count)
         return self.articlesName.count
     }
 
@@ -154,49 +166,64 @@ class ArticleListTableViewController: UITableViewController {
         //cell.url.text! = self.articlesURL[(indexPath as NSIndexPath).item]
         
         let userName = self.articlesName[(indexPath as NSIndexPath).item]
-        
+//        print("userName should be: ")
+//        print(self.articlesName)
+//        print(userName)
         cell.articleButton.borderColor = self.colorDict[userName]!
         cell.articleButton.setTitleColor(self.colorDict[userName]!, for: .normal)
         
+        var articleTitle = self.articlesTitle[(indexPath as NSIndexPath).item]
         
-        var articleTitle = ""
-        var articleImage = UIImage()
+        var articleImage :UIImage? = nil //UIImage()
+        cell.articleImage.image = nil
         
-            self.url = URL(string: self.articlesURL[(indexPath as NSIndexPath).item])
-            
-            Readability.parse(url: self.url!) { data in
-                
+        print(indexPath.item)
+        
+            if let url_ = URL(string: self.articlesURL[(indexPath as NSIndexPath).item])
+            {
+        
+            Readability.parse(url: url_) { data in
+                print("URL is not nil: ")
+                print(url_)
                 self.parsedData = data
                 
                 guard let imageUrlStr = data?.topImage else {
+                    
+                    print("no image found")
+                    articleTitle = self.articlesURL[(indexPath as NSIndexPath).item]
+                    cell.articleTitle.text! = articleTitle
+                    cell.articleImage.image = nil
+                    
                     return
                 }
                 
                 guard let imageUrl = URL(string: imageUrlStr) else {
+                    print("no 2")
                     return
                 }
                 
                 guard let imageData = try? Data(contentsOf: imageUrl) else {
+                    print("no 3")
                     return
                 }
                 
-                articleTitle = (data?.title)!
-                
+                //articleTitle = (data?.title)!
+                //print(articleTitle)
                 articleImage = UIImage(data: imageData)!
                 
-                print(articleTitle)
-            
-        if articleTitle == ""
-        {
-            articleTitle = self.articlesURL[(indexPath as NSIndexPath).item]
-        }
+        
+                cell.articleImage.image = articleImage
+                
+                }
+            }
+            else
+            {
+
+            }
         
         cell.articleTitle.text! = articleTitle
-        cell.articleImage.image = articleImage
         cell.articleButton.setTitle(self.articlesName[(indexPath as NSIndexPath).item], for: .normal)
         cell.tag = (indexPath as NSIndexPath).row
-        
-        }
 
         return cell
     }
@@ -215,7 +242,7 @@ class ArticleListTableViewController: UITableViewController {
         let more = UITableViewRowAction(style: .normal, title: "Save to Personal") { action, index in
             print("more button tapped")
             
-            let path = "users/" + self.name + "/personalList"
+            let path = "users/" + self.userID! + "/personalList"
             
             let date = Date()
             print(date)
@@ -224,7 +251,7 @@ class ArticleListTableViewController: UITableViewController {
             dateFormatter.dateFormat = "EEE, dd MMM yyyy hh:mm:ss +zzzz"
             let dateString = dateFormatter.string(from: date)
             
-            let post = ["Name": self.articlesName[(index as NSIndexPath).item], "url":self.articlesURL[(index as NSIndexPath).item], "date": dateString]
+            let post = ["Name": self.articlesName[(index as NSIndexPath).item], "url":self.articlesURL[(index as NSIndexPath).item], "date": dateString, "title":self.articlesTitle[(index as NSIndexPath).item]]
             
             self.ref.child(path).childByAutoId().setValue(post)
             
@@ -256,6 +283,7 @@ class ArticleListTableViewController: UITableViewController {
             let alert = UIAlertController(title: "Invalid URL", message: "Sorry, we could not open that url.", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
+            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
     

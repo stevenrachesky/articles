@@ -20,8 +20,8 @@ class LoginViewController: UIViewController {
     
 
     @IBOutlet weak var rememberMeImage: UIImageView!
-    @IBOutlet weak var groupCode: UITextField!
-    @IBOutlet weak var fullName: UITextField!
+    @IBOutlet weak var groupCode: UITextField! // this is actually the password
+    @IBOutlet weak var fullName: UITextField! // this is actually the email
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,15 +54,52 @@ class LoginViewController: UIViewController {
         }
         
         // Automatic login
-        if (rememberMeActive == true && fullName.text != "" && group == betaGroupCode)
+        if (rememberMeActive == true && fullName.text != "")
         {
             print("HERE")
             rememberMeImage.image = activeImage
+            
+            FIRAuth.auth()?.signIn(withEmail: fullName.text!, password: groupCode.text!) { (user, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    print(error._code)
+                    if (error._code == 17009)
+                    {
+                        let alert = UIAlertController(title: "Invalid password or email", message: "Please enter a valid password and email combination", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                    else if (error._code == 17999)
+                    {
+                        let alert = UIAlertController(title: "Invalid password or email", message: "Please enter a valid password and email combination", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                    else if (error._code == 17011)
+                    {
+                        let alert = UIAlertController(title: "Invalid password or email", message: "Please enter a valid password and email combination", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                    else if (error._code == 17020)
+                    {
+                        let alert = UIAlertController(title: "No service", message: "OH is unable to verify your credentials due to a lack of reception", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                    
+                    return
+                }
+                
+            
+            
             
             // Perform Segue
             OperationQueue.main.addOperation {
                 [weak self] in
                 self?.performSegue(withIdentifier: "login", sender: self)
+            }
+                
             }
         }
         
@@ -107,22 +144,52 @@ class LoginViewController: UIViewController {
             UserDefaults.standard.set(rememberMeActive, forKey: "isRememberMeActive")
         }
             
-        if groupCode.text == betaGroupCode
-        {
-            //let post = ["fullName": fullName.text!, "personalList": ["key1":["Name" : "Name One", "url" :"Article One", "date": "Date"], "key2":["Name" : "Name Two", "url" :"Article Two", "date": "Date"], "key3": ["Name": "Name Three", "url" :"Article Three", "date": "Date"]], "groups": ["HarvardBeta1"]] as [String : Any]
+
+        FIRAuth.auth()?.signIn(withEmail: fullName.text!, password: groupCode.text!) { (user, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                print(error._code)
+                if (error._code == 17009)
+                {
+                    let alert = UIAlertController(title: "Invalid password or email", message: "Please enter a valid password and email combination", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                else if (error._code == 17999)
+                {
+                    let alert = UIAlertController(title: "Invalid password or email", message: "Please enter a valid password and email combination", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                else if (error._code == 17011)
+                {
+                    let alert = UIAlertController(title: "Invalid password or email", message: "Please enter a valid password and email combination", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                else if (error._code == 17020)
+                {
+                    let alert = UIAlertController(title: "No service", message: "OH is unable to verify your credentials due to a lack of reception", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                
+                return
+            }
             
-            let post = ["fullName": fullName.text!, "personalList": [], "groups": ["HarvardBeta1"]] as [String : Any]
-            
-            
-            
-            self.ref.child("users").child(fullName.text!).setValue(post)
-            performSegue(withIdentifier: "login", sender: sender)
+            self.performSegue(withIdentifier: "login", sender: sender)
         }
+        
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-     
-        return false
+        
+        if identifier == "login"
+        {
+            return false
+        }
+        
+        return true
     }
 
     
@@ -136,7 +203,7 @@ class LoginViewController: UIViewController {
         if segue.identifier == "login"
         {
             let destVC = segue.destination as! MainTabBarController
-            destVC.name = fullName.text!
+            //destVC.name = fullName.text!
 
         }
         

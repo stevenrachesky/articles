@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import ReadabilityKit
 
 class ArticleViewController: UIViewController {
 
@@ -22,6 +23,12 @@ class ArticleViewController: UIViewController {
     
     var name = ""
     var group = ""
+    
+    // Readability variables
+    var parser: Readability?
+    var url: URL?
+    var image: UIImage?
+    var parsedData: ReadabilityData?
     
     
     override func viewDidLoad() {
@@ -59,8 +66,8 @@ class ArticleViewController: UIViewController {
         })
         
         print("Article Scene: ")
-        print(self.name)
-        print(self.group)
+//        print(self.name)
+//        print(self.group)
 
     }
 
@@ -77,15 +84,82 @@ class ArticleViewController: UIViewController {
         dateFormatter.dateFormat = "EEE, dd MMM yyyy hh:mm:ss +zzzz"
         let dateString = dateFormatter.string(from: date)
         
-        let post = ["Name": self.name, "url":self.urlLabel.text!, "date": dateString]
+        var articleTitle = ""
         
-        self.ref.child(path).childByAutoId().setValue(post)
+        if let url_ = URL(string: self.urlLabel.text!)
+        {
+            Readability.parse(url: url_) { data in
+                print("URL is not nil: ")
+                print(url_)
+                self.parsedData = data
+                
+                guard let imageUrlStr = data?.topImage else {
+                    
+                    print("no image found")
+                    articleTitle = self.urlLabel.text!
+                    
+                    let post = ["Name": self.name, "url":self.urlLabel.text!, "date": dateString, "title": articleTitle]
+                    
+                    self.ref.child(path).childByAutoId().setValue(post)
+                    
+                    
+                    let articleList = self.childViewControllers[0] as! ArticleListTableViewController
+                    //articleList.tableView.reloadData()
+                    articleList.viewWillAppear(true)
+                    
+                    self.copyView.isHidden = true
+                    return
+                }
+                
+                guard let imageUrl = URL(string: imageUrlStr) else {
+                    print("no 2")
+                    return
+                }
+                
+                guard let imageData = try? Data(contentsOf: imageUrl) else {
+                    print("no 3")
+                    return
+                }
+                
+                articleTitle = (data?.title)!
+                //print(articleTitle)
+                
+                if (articleTitle == "")
+                {
+                    print("articles title is empty")
+                    articleTitle = self.urlLabel.text!
+                }
+                print("title in post \(articleTitle)")
+                let post = ["Name": self.name, "url":self.urlLabel.text!, "date": dateString, "title": articleTitle]
+                
+                self.ref.child(path).childByAutoId().setValue(post)
+                
+                
+                let articleList = self.childViewControllers[0] as! ArticleListTableViewController
+                //articleList.tableView.reloadData()
+                articleList.viewWillAppear(true)
+                
+                self.copyView.isHidden = true
+            }
+        }
+        else
+        {
+            articleTitle = self.urlLabel.text!
+            print("title in post \(articleTitle)")
+            let post = ["Name": self.name, "url":self.urlLabel.text!, "date": dateString, "title": articleTitle]
+            
+            self.ref.child(path).childByAutoId().setValue(post)
+            
+            
+            let articleList = self.childViewControllers[0] as! ArticleListTableViewController
+            articleList.tableView.reloadData()
+            articleList.viewWillAppear(true)
+            
+            self.copyView.isHidden = true
+        }
         
-        let articleList = self.childViewControllers[0] as! ArticleListTableViewController
-        articleList.tableView.reloadData()
-        articleList.viewWillAppear(true)
-        
-        copyView.isHidden = true
+
+
 
     }
 

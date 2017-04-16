@@ -16,8 +16,8 @@ class GroupNavigationViewController: UINavigationController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        print("Group Nav:")
-        print(name)
+        //print("Group Nav:")
+        //print(name)
     }
 
     override func didReceiveMemoryWarning() {
