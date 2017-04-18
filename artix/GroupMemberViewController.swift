@@ -157,6 +157,7 @@ class GroupMemberViewController: UIViewController, UITableViewDataSource, UITabl
             print(member)
             // member variables
             var memberID = ""
+            var memberName = member.value
             
             // clean phone numbrer
             var phoneNumber = member.key
@@ -188,6 +189,7 @@ class GroupMemberViewController: UIViewController, UITableViewDataSource, UITabl
                 // add group to user section
                 var user_group_path = "users/" + memberID + "/groups/" + groupID
                 var user_path = "users/" + memberID
+                var group_user_path = "groups/" + groupID + "/members/" + memberID
                 
                 //check if user exists
                 self.ref.child(user_path).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -197,6 +199,7 @@ class GroupMemberViewController: UIViewController, UITableViewDataSource, UITabl
                     {
                        // user exists, add group
                         self.ref.child(user_group_path).setValue(self.groupName)
+                        self.ref.child(group_user_path).setValue(memberName)
                     }
                     else
                     {

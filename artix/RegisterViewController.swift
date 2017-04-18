@@ -170,6 +170,14 @@ class RegisterViewController: UIViewController {
                             
                             self.ref.child("phoneNumbers").child(phoneNumber).setValue(post_phone)
                             
+                            for group in groupDict
+                            {
+                                let group_key = group.key as! String
+                                let group_user_path = "groups/" + group_key + "/members/" + (FIRAuth.auth()?.currentUser!.uid)!
+                                
+                                self.ref.child(group_user_path).setValue(self.fullName.text!)
+                            }
+                            
                         })
                     }
                     else

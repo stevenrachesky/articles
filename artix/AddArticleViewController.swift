@@ -47,7 +47,7 @@ class AddArticleViewController: UIViewController {
 
     @IBAction func addDidTouch(_ sender: Any) {
         
-        let path = "groups/" + self.group
+        let path = "groups/" + self.group + "/articles"
         
         let date = Date()
         //print(date)

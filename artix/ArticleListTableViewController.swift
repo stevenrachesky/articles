@@ -38,7 +38,7 @@ class ArticleListTableViewController: UITableViewController {
         
         //self.tableView.reloadData()
         
-        let path = "groups/" + self.group
+        let path = "groups/" + self.group + "/articles"
         
         self.ref.child(path).observeSingleEvent(of: .value, with: { (snapshot) in
             

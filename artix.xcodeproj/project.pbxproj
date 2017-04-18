@@ -17,6 +17,8 @@
 		9F36AA371E89B2C6003E9E2F /* PersonalListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F36AA361E89B2C6003E9E2F /* PersonalListTableViewController.swift */; };
 		9F36AA391E89B2E6003E9E2F /* GroupListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F36AA381E89B2E6003E9E2F /* GroupListTableViewController.swift */; };
 		9F36AA3B1E89B675003E9E2F /* ArticleListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F36AA3A1E89B675003E9E2F /* ArticleListTableViewController.swift */; };
+		9F5463331EA65A1000747D5C /* EditGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5463321EA65A1000747D5C /* EditGroupViewController.swift */; };
+		9F5F96F01EA52970005669DA /* AddGroupMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F96EF1EA52970005669DA /* AddGroupMemberViewController.swift */; };
 		9F802D201E91DD2B006C4D5B /* ArticlesReadabilityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F802D1F1E91DD2B006C4D5B /* ArticlesReadabilityTableViewCell.swift */; };
 		9FB32F341EA1EC7A00492519 /* GroupNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB32F331EA1EC7A00492519 /* GroupNameViewController.swift */; };
 		9FB32F381EA1F2B300492519 /* GroupMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB32F371EA1F2B300492519 /* GroupMemberViewController.swift */; };
@@ -94,6 +96,8 @@
 		9F36AA361E89B2C6003E9E2F /* PersonalListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonalListTableViewController.swift; path = ../PersonalListTableViewController.swift; sourceTree = "<group>"; };
 		9F36AA381E89B2E6003E9E2F /* GroupListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupListTableViewController.swift; sourceTree = "<group>"; };
 		9F36AA3A1E89B675003E9E2F /* ArticleListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleListTableViewController.swift; sourceTree = "<group>"; };
+		9F5463321EA65A1000747D5C /* EditGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditGroupViewController.swift; sourceTree = "<group>"; };
+		9F5F96EF1EA52970005669DA /* AddGroupMemberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupMemberViewController.swift; sourceTree = "<group>"; };
 		9F802D1F1E91DD2B006C4D5B /* ArticlesReadabilityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesReadabilityTableViewCell.swift; sourceTree = "<group>"; };
 		9FB32F331EA1EC7A00492519 /* GroupNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupNameViewController.swift; sourceTree = "<group>"; };
 		9FB32F371EA1F2B300492519 /* GroupMemberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMemberViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +248,8 @@
 				9F36AA381E89B2E6003E9E2F /* GroupListTableViewController.swift */,
 				9FE7600F1E889C1C004A72C8 /* AppDelegate.swift */,
 				9FE760151E889C1C004A72C8 /* Main.storyboard */,
+				9F5463321EA65A1000747D5C /* EditGroupViewController.swift */,
+				9F5F96EF1EA52970005669DA /* AddGroupMemberViewController.swift */,
 				9FB32F331EA1EC7A00492519 /* GroupNameViewController.swift */,
 				9FD509E71E998785009ACAF9 /* RegisterViewController.swift */,
 				9F802D1F1E91DD2B006C4D5B /* ArticlesReadabilityTableViewCell.swift */,
@@ -599,6 +605,7 @@
 				9F2DD9F81E90619300C423DE /* AddArticleViewController.swift in Sources */,
 				9FDBF1B71E8C532900770FDE /* SpringView.swift in Sources */,
 				9F36AA371E89B2C6003E9E2F /* PersonalListTableViewController.swift in Sources */,
+				9F5F96F01EA52970005669DA /* AddGroupMemberViewController.swift in Sources */,
 				9FDBF19F1E8C532900770FDE /* AsyncImageView.swift in Sources */,
 				9FDBF1A21E8C532900770FDE /* DesignableButton.swift in Sources */,
 				9FDBF1B91E8C532900770FDE /* TransitionZoom.swift in Sources */,
@@ -613,6 +620,7 @@
 				9FDBF1A61E8C532900770FDE /* DesignableTextField.swift in Sources */,
 				9FD509E81E998785009ACAF9 /* RegisterViewController.swift in Sources */,
 				9FDBF1AC1E8C532900770FDE /* LoadingView.swift in Sources */,
+				9F5463331EA65A1000747D5C /* EditGroupViewController.swift in Sources */,
 				9FDBF1B01E8C532900770FDE /* Spring.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

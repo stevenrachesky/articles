@@ -37,7 +37,7 @@ class ArticleViewController: UIViewController {
         // Do any additional setup after loading the view.
         copyView.isHidden = true
         
-        let path = "groups/" + self.group
+        let path = "groups/" + self.group + "/articles"
         
         var urlList : [String] = []
         
@@ -78,7 +78,7 @@ class ArticleViewController: UIViewController {
     
     @IBAction func didTouchAddURL(_ sender: Any) {
         
-        let path = "groups/" + self.group
+        let path = "groups/" + self.group + "/articles"
         let date = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, dd MMM yyyy hh:mm:ss +zzzz"

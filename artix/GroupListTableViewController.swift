@@ -15,6 +15,7 @@ class GroupListTableViewController: UITableViewController {
     var userGroupsKeys : [String] = []
     var name = ""
     var userID = FIRAuth.auth()?.currentUser?.uid
+    var indexOfRowSwipe = 0
     
     //Firebase reference
     var ref = FIRDatabase.database().reference()
@@ -102,18 +103,11 @@ class GroupListTableViewController: UITableViewController {
         let more = UITableViewRowAction(style: .normal, title: "Add\nmember") { action, index in
             print("more button tapped")
             
-//            let path = "users/" + self.userID! + "/personalList"
-//            
-//            let date = Date()
-//            print(date)
-//            
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "EEE, dd MMM yyyy hh:mm:ss +zzzz"
-//            let dateString = dateFormatter.string(from: date)
-//            
-//            let post = ["Name": self.articlesName[(index as NSIndexPath).item], "url":self.articlesURL[(index as NSIndexPath).item], "date": dateString, "title":self.articlesTitle[(index as NSIndexPath).item]]
-//            
-//            self.ref.child(path).childByAutoId().setValue(post)
+            self.indexOfRowSwipe = index.row
+            
+            self.performSegue(withIdentifier: "addMember", sender: self)
+            
+            print("segue performed")
             
             tableView.setEditing(false, animated: true)
             
@@ -121,10 +115,45 @@ class GroupListTableViewController: UITableViewController {
         more.backgroundColor = UIColor(red: 2.0/255.0, green: 179.0/255.0, blue: 1.0, alpha: 1.0)
         
         let leave = UITableViewRowAction(style: .normal, title: "Leave\ngroup") { action, index in
-            print("leave button tapped")
+            print("leave button tapped at \(index.row)")
+            
+            let groupKey = self.userGroupsKeys[index.row]
+            
+            let user_group_path = "users/" + self.userID! + "/groups/" + groupKey
+            
+            let group_user_path = "groups/" + groupKey + "/members/" + self.userID!
+            
+            let confirmAlert = UIAlertController(title: "Are you sure?", message: "You will lose access to this group.", preferredStyle: UIAlertControllerStyle.alert)
+            
+            confirmAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+                // Yes leave group
+                print("Handle Yes logic here")
+                
+                self.userGroupsKeys.remove(at: index.row)
+                self.userGroups.remove(at: index.row)
+                
+                self.ref.child(user_group_path).removeValue()
+                self.ref.child(group_user_path).removeValue()
+                
+                self.tableView.reloadData()
+                
+                tableView.setEditing(false, animated: true)
+                
+            }))
+            
+            confirmAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                // Don't leave group
+                print("Handle Cancel Logic here")
+                
+                confirmAlert.dismiss(animated: true, completion: nil)
+                
+                tableView.setEditing(false, animated: true)
+            }))
+            
+            self.present(confirmAlert, animated: true, completion: nil)
             
             
-            tableView.setEditing(false, animated: true)
+            
             
         }
         leave.backgroundColor = UIColor(red: 249.0/255.0, green: 24.0/255.0, blue: 24.0/255.0, alpha: 1.0)
@@ -132,6 +161,9 @@ class GroupListTableViewController: UITableViewController {
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
             print("edit button tapped")
             
+            self.indexOfRowSwipe = index.row
+            
+            self.performSegue(withIdentifier: "edit", sender: self)
             
             tableView.setEditing(false, animated: true)
             
@@ -196,6 +228,23 @@ class GroupListTableViewController: UITableViewController {
             let buttonRow = (sender! as AnyObject).tag
             destVC.group = self.userGroupsKeys[buttonRow!] 
             
+        }
+        else if segue.identifier == "addMember"
+        {
+            let destVC = segue.destination as! AddGroupMemberViewController
+            
+            destVC.groupKey = self.userGroupsKeys[indexOfRowSwipe]
+            destVC.groupName = self.userGroups[indexOfRowSwipe]
+            
+        }
+        else if segue.identifier == "edit"
+        {
+            let destVC = segue.destination as! EditGroupViewController
+            //print(self.userGroups)
+            //print(self.userGroupsKeys)
+            print(indexOfRowSwipe)
+            destVC.groupKey = self.userGroupsKeys[indexOfRowSwipe]
+            destVC.groupName = self.userGroups[indexOfRowSwipe]
         }
     }
     
