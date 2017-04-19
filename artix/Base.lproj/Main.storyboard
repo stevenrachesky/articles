@@ -600,12 +600,14 @@
                                 <items>
                                     <navigationItem title="Group Name" id="WWg-cD-cVH">
                                         <barButtonItem key="leftBarButtonItem" systemItem="undo" id="xhe-Iq-eSe">
+                                            <color key="tintColor" red="0.0078431372550000003" green="0.70196078429999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <segue destination="P2z-Ap-Ffs" kind="unwind" unwindAction="unwindToViewController:" id="WvW-Jk-YFr"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" image="next" style="plain" id="JBb-F2-SgH" userLabel="Next">
                                             <inset key="imageInsets" minX="15" minY="15" maxX="15" maxY="15"/>
+                                            <color key="tintColor" red="0.0078431372550000003" green="0.70196078429999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <segue destination="E7J-nt-7ad" kind="show" identifier="next" id="qoB-SM-r2H"/>
                                             </connections>
@@ -613,29 +615,26 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7CQ-ef-RWN">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter group name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7CQ-ef-RWN" customClass="DesignableTextField" customModule="artix" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="375" height="80"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="EBl-MR-krI"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="0.32156862749999998" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter group name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d42-Lh-JTA">
-                                <rect key="frame" x="4" y="76" width="101" height="14.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" red="0.32156862749999998" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.97244364023208618" green="0.97260981798171997" blue="0.97243314981460571" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="d42-Lh-JTA" firstAttribute="top" secondItem="7CQ-ef-RWN" secondAttribute="top" constant="4" id="LdR-RP-RHS"/>
                             <constraint firstItem="4hh-q2-VFJ" firstAttribute="leading" secondItem="7CQ-ef-RWN" secondAttribute="leading" id="RRR-NI-Dbv"/>
                             <constraint firstItem="4hh-q2-VFJ" firstAttribute="trailing" secondItem="7CQ-ef-RWN" secondAttribute="trailing" id="c1f-2a-Z0c"/>
-                            <constraint firstItem="d42-Lh-JTA" firstAttribute="leading" secondItem="ohc-0d-blz" secondAttribute="leadingMargin" constant="-12" id="o71-Ls-OQl"/>
                             <constraint firstItem="4hh-q2-VFJ" firstAttribute="top" secondItem="cDI-EO-yAm" secondAttribute="bottom" constant="8" id="p7K-GP-6ol"/>
                             <constraint firstAttribute="trailingMargin" secondItem="7CQ-ef-RWN" secondAttribute="trailing" constant="-16" id="twt-yc-LgV"/>
                             <constraint firstItem="7CQ-ef-RWN" firstAttribute="leading" secondItem="ohc-0d-blz" secondAttribute="leadingMargin" constant="-16" id="uLs-I4-7YO"/>
@@ -658,7 +657,7 @@
             <objects>
                 <tableViewController title="Articles Table View Controller" id="gRA-Xz-oeb" customClass="ArticleListTableViewController" customModule="artix" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="28" sectionFooterHeight="28" id="KIg-gP-hdS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>

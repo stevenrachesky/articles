@@ -31,7 +31,7 @@ class MainTabBarController: UITabBarController {
             let barViewControllers = self.viewControllers
             let groupNav = barViewControllers![1] as! UINavigationController
             let groupList = groupNav.topViewController as! GroupListTableViewController
-            self.name = (snapshot.value! as! NSDictionary)["fullName"]! as! String
+            self.name = (snapshot.value! as! NSDictionary)["fullName"]! as! String //bug here
             groupList.name = self.name
             
             let perosnalNav = barViewControllers![0] as! UINavigationController

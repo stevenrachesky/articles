@@ -177,14 +177,6 @@ class RegisterViewController: UIViewController {
                 // Check if phone number already listed
                 self.ref.child("phoneNumbers").observeSingleEvent(of: .value, with: { (snapshot) in
                     
-                    // clean phone numbrer
-//                    var phoneNumber = self.number.text!
-//                    phoneNumber = phoneNumber.trimmingCharacters(in: NSCharacterSet(charactersIn: "+") as CharacterSet)
-//                    let first_character = phoneNumber.substring(to: phoneNumber.index(after: phoneNumber.startIndex))
-//                    if first_character == "1"
-//                    {
-//                        phoneNumber.remove(at: phoneNumber.startIndex)
-//                    }
                     var phoneNumber = self.cleanPhoneNumber(phoneNumber: self.number.text!)
                     print(phoneNumber)
                     
@@ -201,7 +193,11 @@ class RegisterViewController: UIViewController {
                             
                             self.ref.child("users").child((FIRAuth.auth()?.currentUser!.uid)!).setValue(post_user)
                             
+                            print("1.00")
+                            
                             self.ref.child("phoneNumbers").child(phoneNumber).setValue(post_phone)
+                            
+                            print("2.00")
                             
                             for group in groupDict
                             {
@@ -210,6 +206,8 @@ class RegisterViewController: UIViewController {
                                 
                                 self.ref.child(group_user_path).setValue(self.fullName.text!)
                             }
+                            
+                            self.performSegue(withIdentifier: "join", sender: self)
                             
                         })
                     }
@@ -224,10 +222,9 @@ class RegisterViewController: UIViewController {
                         
                         self.ref.child("phoneNumbers").child(phoneNumber).setValue(post_phone)
                         
-                        
+                        self.performSegue(withIdentifier: "join", sender: self)
                     }
-                    
-                    self.performSegue(withIdentifier: "join", sender: self)
+
                 })
                 
                 
