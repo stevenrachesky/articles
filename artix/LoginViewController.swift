@@ -19,6 +19,7 @@ class LoginViewController: UIViewController {
     let activeImage = UIImage(named: "active checkbox")
     var autoLogin = true
     
+    @IBOutlet var scrollView: UIScrollView!
 
     @IBOutlet weak var rememberMeImage: UIImageView!
     @IBOutlet weak var groupCode: UITextField! // this is actually the password
@@ -26,8 +27,8 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
-        // Do any additional setup after loading the view.
         
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
@@ -36,11 +37,9 @@ class LoginViewController: UIViewController {
         //tap.cancelsTouchesInView = false
         
         view.addGestureRecognizer(tap)
-        
         rememberMeActive = UserDefaults.standard.bool(forKey: "isRememberMeActive")
         let name = UserDefaults.standard.string(forKey: "name")
         let group = UserDefaults.standard.string(forKey: "group")
-        
         if (rememberMeActive == true)
         {
             fullName.text = UserDefaults.standard.string(forKey: "name")
@@ -53,11 +52,10 @@ class LoginViewController: UIViewController {
             groupCode.text = ""
             rememberMeImage.image = inactiveImage
         }
-        
+
         // Automatic login
         if (rememberMeActive == true && fullName.text != "" && self.autoLogin == true)
         {
-            print("HERE")
             rememberMeImage.image = activeImage
             
             FIRAuth.auth()?.signIn(withEmail: fullName.text!, password: groupCode.text!) { (user, error) in
@@ -94,7 +92,6 @@ class LoginViewController: UIViewController {
                 
             
             
-            
             // Perform Segue
             OperationQueue.main.addOperation {
                 [weak self] in
@@ -105,10 +102,10 @@ class LoginViewController: UIViewController {
         }
         
         
-        
-        
+    
         
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

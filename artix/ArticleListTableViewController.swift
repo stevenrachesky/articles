@@ -9,8 +9,9 @@
 import UIKit
 import Firebase
 import ReadabilityKit
+import SafariServices
 
-class ArticleListTableViewController: UITableViewController {
+class ArticleListTableViewController: UITableViewController, SFSafariViewControllerDelegate {
     
     var name = ""
     var group = ""
@@ -275,7 +276,14 @@ class ArticleListTableViewController: UITableViewController {
         
         if let url = URL(string: self.articlesURL[indexPath.row])
         {
-            UIApplication.shared.openURL(url)
+            // Uncomment this line if want to change color of only the DONE button
+            UIButton.appearance().tintColor = UIColor(red: 2.0/255.0, green: 179.0/255.0, blue: 1.0, alpha: 1.0)
+            let safariVC = SFSafariViewController(url: url)
+            //safariVC.preferredBarTintColor = UIColor(red: 2.0/255.0, green: 179.0/255.0, blue: 1.0, alpha: 1.0)
+            safariVC.delegate = self
+            self.present(safariVC, animated: true, completion: nil)
+            
+            //UIApplication.shared.openURL(url)
             tableView.deselectRow(at: indexPath, animated: true)
         }
         else
@@ -294,6 +302,14 @@ class ArticleListTableViewController: UITableViewController {
         let blue:CGFloat = CGFloat(drand48())
         
         return UIColor(red:red, green: green, blue: blue, alpha: 1.0)
+    }
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController)
+    {
+        controller.dismiss(animated: true, completion: nil)
+        
+        //resetting your button color
+        UIButton.appearance().tintColor = .blue
     }
     
     

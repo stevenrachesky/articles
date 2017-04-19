@@ -18,6 +18,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var confirmPassword: UITextField!
     @IBOutlet weak var email: UITextField!
    
+    @IBOutlet var scrollView: UIScrollView!
     
     //Firebase reference
     var ref = FIRDatabase.database().reference()
@@ -33,6 +34,12 @@ class RegisterViewController: UIViewController {
         //tap.cancelsTouchesInView = false
         
         view.addGestureRecognizer(tap)
+        
+        
+//        let notificationCenter = NotificationCenter.default
+//        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillHide, object: nil)
+//        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,6 +47,26 @@ class RegisterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // scroll function
+//    func adjustForKeyboard(notification: Notification) {
+//        let userInfo = notification.userInfo!
+//        print("1")
+//        
+//        let keyboardScreenEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+//        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+//        
+//        if notification.name == Notification.Name.UIKeyboardWillHide {
+//            self.scrollView.contentInset = UIEdgeInsets.zero
+//        } else {
+//            print("2")
+//            self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
+//        }
+//        
+//        self.scrollView.scrollIndicatorInsets = self.scrollView.contentInset
+//        
+////        let selectedRange = self.scrollView.selectedRange
+////        self.scrollView.scrollRangeToVisible(selectedRange)
+//    }
     
 
     @IBAction func fullNameEditingChanged(_ sender: Any) {
@@ -76,6 +103,11 @@ class RegisterViewController: UIViewController {
     @IBAction func joinDidTouch(_ sender: Any) {
         
         var shouldSegue = true
+        var phone_ = ""
+        if self.number.text! != ""
+        {
+            phone_ = cleanPhoneNumber(phoneNumber: number.text!)
+        }
         
         if fullName.text == ""
         {
@@ -84,7 +116,7 @@ class RegisterViewController: UIViewController {
             shouldSegue = false
         }
         
-        if (number.text! == "") // ADD MORE ERROR CHECKING HERE
+        if (phone_.length != 10 && Int(phone_) != nil) // ADD MORE ERROR CHECKING HERE
         {
             number.layer.borderColor = UIColor.red.cgColor
             number.layer.borderWidth = 1.0
@@ -146,13 +178,14 @@ class RegisterViewController: UIViewController {
                 self.ref.child("phoneNumbers").observeSingleEvent(of: .value, with: { (snapshot) in
                     
                     // clean phone numbrer
-                    var phoneNumber = self.number.text!
-                    phoneNumber = phoneNumber.trimmingCharacters(in: NSCharacterSet(charactersIn: "+") as CharacterSet)
-                    let first_character = phoneNumber.substring(to: phoneNumber.index(after: phoneNumber.startIndex))
-                    if first_character == "1"
-                    {
-                        phoneNumber.remove(at: phoneNumber.startIndex)
-                    }
+//                    var phoneNumber = self.number.text!
+//                    phoneNumber = phoneNumber.trimmingCharacters(in: NSCharacterSet(charactersIn: "+") as CharacterSet)
+//                    let first_character = phoneNumber.substring(to: phoneNumber.index(after: phoneNumber.startIndex))
+//                    if first_character == "1"
+//                    {
+//                        phoneNumber.remove(at: phoneNumber.startIndex)
+//                    }
+                    var phoneNumber = self.cleanPhoneNumber(phoneNumber: self.number.text!)
                     print(phoneNumber)
                     
                     if snapshot.hasChild(phoneNumber)
@@ -205,6 +238,40 @@ class RegisterViewController: UIViewController {
             
         }
         
+    }
+    
+    func cleanPhoneNumber(phoneNumber: String) -> String
+    {
+        var number = phoneNumber
+        
+        number = number.trimmingCharacters(in: NSCharacterSet(charactersIn: "+") as CharacterSet)
+        let first_character = number.substring(to: number.index(after: number.startIndex))
+        if first_character == "1"
+        {
+            number.remove(at: number.startIndex)
+        }
+        
+        if number.contains("(")
+        {
+            number = number.replacingOccurrences(of: "(", with: "")
+        }
+        
+        if number.contains(")")
+        {
+            number = number.replacingOccurrences(of: ")", with: "")
+        }
+        
+        if number.contains("-")
+        {
+            number = number.replacingOccurrences(of: "-", with: "")
+        }
+        
+        if number.contains(" ")
+        {
+            number = number.replacingOccurrences(of: " ", with: "")
+        }
+        
+        return number
     }
     
     
